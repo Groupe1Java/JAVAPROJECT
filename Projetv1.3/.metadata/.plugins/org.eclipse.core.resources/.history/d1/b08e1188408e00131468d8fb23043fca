@@ -1,0 +1,113 @@
+package Métier;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import Vue.Frame1;
+
+
+
+public class Recherche {
+	
+	public static void Rechercher(String choix,String type, String mot) throws SQLException {
+		// TODO Auto-generated method stub
+		//On récupére le choix de la rechereche : lieu ou parcours
+		String table;
+		String select = null;
+		String dans;
+		if(choix=="lieux")
+			 {
+			 table="SELECT id,nom,descriptif FROM lieu ";
+			 dans="nom";
+			 }
+		 else if(choix=="parcours")
+		    {
+			 table ="SELECT id,nom,descriptif  FROM parcours ";
+			 dans="libelle";
+		    }
+		 else
+		 {
+			 table="SELECT * FROM lieu ";dans="nom";
+		 }
+		 //On récupére le type de recherche : nom exact, partie du nom,mots dans le descriptif et le libellé,p.o.i(parcours)
+
+		   
+			if(type=="exacte")
+				 {
+					select="WHERE "+ dans+"_"+choix+"='"+mot+"'";
+				 }
+			 else if(type=="partielle")
+			    {
+				 select ="WHERE "+ dans+"_"+choix+" LIKE '%"+mot+"%'";
+			    }
+			 else if(type=="description")
+			    {
+				 select ="WHERE descriptif"+"_"+choix+" LIKE '%"+mot+"%' OR libelle"+"_"+choix+" LIKE '%"+mot+"%'";
+			    }
+			 else if(type=="poi")
+			    {
+				 if(choix=="lieu")
+					select =",poi WHERE libelle_poi='"+mot+"'";
+				 else if(choix=="parcours")
+					select =",comper,poi WHERE libelle_poi='"+mot+"'";
+			    }
+			  
+		   String query=table+select;
+		 
+		try{
+		PreparedStatement lire =Connect.getInstance().prepareStatement(query);
+		//System.out.println(lire.toString());
+		Statement state = Connect.connect.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		ResultSet res = state.executeQuery(query); 
+		int i =1;
+		ResultSetMetaData resultMeta = res.getMetaData();
+		
+	
+			//for( i = 1; i <=  resultMeta.getColumnCount(); i++)
+			  ArrayList<String> list = new ArrayList<String>()   ;    
+		 while(res.next()){
+			for( i = 1; i <=  resultMeta.getColumnCount(); i++)//appeler méthode d'affichage des éléments 
+			{	
+			
+			String nom=res.getString(2);
+			String des=res.getString(3);
+			list.add(nom);
+			list.add(des);
+			System.out.prinln(list.get(i));
+			//String tab1[][][]={{id},{nom},{description}};
+			
+		      //On regarde si on se trouve sur la dernière ligne du résultat
+		       if(i==resultMeta.getColumnCount())
+		       { 
+		    	   Frame1.afficher_rechercher(list);}
+		}
+		}
+		//Elements.afficher_rechercher(dans,data);
+		lire.close();
+		state.close();
+		}
+		catch(SQLException e)
+		{
+		JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur de connexion", JOptionPane.ERROR_MESSAGE);
+		}
+		 
+		}
+	/*public static verif_chaine_string(String Text)//on vérifie nos paramètres de type String
+	{
+		Pattern pattern = Pattern.compile ("[a-zA-Z]");
+		Matcher matcher = pattern.matcher (Text);
+		if(matcher==true)
+		{
+			
+		}
+	return matcher;
+	}*/
+	
+}

@@ -1,0 +1,8 @@
+package Vue;
+
+import javax.swing.JLabel;
+
+public class Sousmenu {
+	
+	
+}

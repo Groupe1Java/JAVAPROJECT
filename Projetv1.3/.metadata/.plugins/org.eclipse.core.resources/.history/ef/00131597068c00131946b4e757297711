@@ -1,0 +1,11 @@
+package Vue;
+
+import javax.swing.JPanel;
+
+public class JPanel_sousmenu {
+	public void sousmenu()
+	{
+		JPanel sousmenu=new JPanel();
+	}
+	
+}

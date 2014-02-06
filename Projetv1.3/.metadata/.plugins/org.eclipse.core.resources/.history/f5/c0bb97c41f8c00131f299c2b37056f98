@@ -1,0 +1,75 @@
+package Vue;
+
+import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+
+public class jMenuItem {
+	public MenuItem()
+	{
+		
+		init_menu();
+		
+	}
+	
+	
+	public void init_menu()
+	{
+	JMenuBar menuBar = new JMenuBar();
+    JMenu menuA = new JMenu("Consulter");
+    JMenuItem menuItemA1 = new JMenuItem("Lieux");
+    JMenuItem menuItemA2 = new JMenuItem("POI");
+    JMenuItem menuItemA3 = new JMenuItem("Parcours");
+    JMenuItem menuItemA4 = new JMenuItem("News");
+    menuA.add(menuItemA1);
+    menuA.add(menuItemA2);
+    menuA.add(menuItemA3);
+    menuA.addSeparator();
+    menuA.add(menuItemA4);
+    
+    JMenu menuB = new JMenu("Editer");
+    JMenuItem menuItemB1 = new JMenuItem("Lieux");
+    JMenuItem menuItemB2 = new JMenuItem("POI");
+    JMenuItem menuItemB3 = new JMenuItem("Parcours");
+    menuB.add(menuItemB1);
+    menuB.add(menuItemB2);
+    menuB.addSeparator();
+    menuB.add(menuItemB3);
+    
+    
+   
+  /*  menuItemA1.addActionListener(new ActionListener(){
+
+    
+    
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            System.exit(0);
+        }
+    });*/
+ 
+
+    JMenu menuC = new JMenu("Rechercher");
+     
+    menuBar.add(menuA);
+    menuBar.add(menuB);
+    menuBar.add(menuC);
+    menuC.addMenuListener(new MenuListener() {
+		public void menuCanceled(MenuEvent arg0) {
+			// TODO Auto-generated method stub
+			 
+		}
+
+		public void menuDeselected(MenuEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void menuSelected(MenuEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+    });
+    
+	}
+}

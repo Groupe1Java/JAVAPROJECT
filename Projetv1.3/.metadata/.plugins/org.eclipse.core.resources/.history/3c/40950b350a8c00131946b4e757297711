@@ -1,0 +1,17 @@
+package Vue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class JPanel_principal extends JFrame {
+	public static void principal()
+	{
+		JPanel principal=new JPanel();
+		JLabel label=new JLabel("ok");
+		principal.add(label);
+		
+	}
+	
+	
+}

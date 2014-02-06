@@ -1,0 +1,12 @@
+package Vue;
+
+import javax.swing.JPanel;
+
+public class JPanel_principal {
+	public static void principal()
+	{
+		JPanel principal=new JPanel();
+	}
+	
+	
+}

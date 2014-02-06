@@ -1,0 +1,11 @@
+package Vue;
+
+import javax.swing.JLabel;
+
+public class Sousmenu {
+	public init_sm_lieux
+	{
+		JLabel lieu=new JLabel("Lieux");
+		
+	}
+}
